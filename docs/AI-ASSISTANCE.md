@@ -1,0 +1,9 @@
+# AI assistance disclosure
+
+OpenAI Codex assists research, specification, implementation, tests, documentation, and browser workflows in this repository. AI-generated implementation must not be described as solely human-authored.
+
+The user's brief requested an ETHOnline entry based on Maqam/Fikeya or a new project, a dedicated repository with incremental commits, testnet-only execution, and submission. The implementation specification records the concrete plan derived from that brief.
+
+Human contributions completed so far: the user selected the problem domain and existing project context, directed the event objective, supplied the testnet-only constraint, and authorized development. Hands-on user testing, implementation feedback and human-narrated demonstration are pending. We will update this record when those contributions actually occur.
+
+ETHOnline warns that projects relying entirely on AI without meaningful team contributions may be ineligible. This disclosure does not claim that eligibility has been approved by organizers.
