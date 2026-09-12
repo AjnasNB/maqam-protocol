@@ -1,3 +1,25 @@
+Events
+ETHConf New
+Plus
+Showcase
+Faucet
+Swag
+About
+Open user menu
+ETHOnline 2026
+Overview
+Dashboard
+Project
+Team
+Mentors
+Info
+Project details
+Images
+Tech stack
+Select prizes
+Video
+Future
+Final
 You're missing the following to complete this form
 Please upload a video. A demo video is required if you're applying to be a finalist.
 Your repository has passed all automated checks
@@ -35,6 +57,8 @@ ETHGlobal event rules
 I confirm that the work I am submitting was built entirely during this hackathon and no work was completed before the event as outlined in the Event Rules & Code of Conduct.
 Submit project
 Project rules
+Project should start from scratch
+You may not add features to existing work but can use boilerplate code.
 Project should use version control
 You must commit frequently and not have small commits with large changes on github.
 Project should be open source
