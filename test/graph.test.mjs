@@ -123,3 +123,12 @@ test("Graph Worker route rejects malformed requests and exposes no credentials",
   assert.equal(unavailable.status, 503);
   assert.match((await unavailable.json()).error, /not configured/);
 });
+
+test("Graph refuses redirects instead of forwarding its credential to another host", async () => {
+  let calls = 0;
+  await assert.rejects(discoverAgents({ task: "", network: 84532 }, { apiKey: "test-only", fetcher: async (_, options) => {
+    calls++; assert.equal(options.redirect, "manual");
+    return new Response(null, { status: 302, headers: { Location: "https://untrusted.invalid" } });
+  } }), /HTTP 302/);
+  assert.equal(calls, 1);
+});

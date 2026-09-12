@@ -5,11 +5,11 @@ import assert from "node:assert/strict";
 // Explicit public resolver avoids a stale local NXDOMAIN cached before domain creation.
 const resolver = new dns.Resolver();
 resolver.setServers(["1.1.1.1"]);
-function call(method, body) {
+function call(method, body, path = "/api/proposal") {
   return new Promise((resolve, reject) => {
     const encoded = body ? JSON.stringify(body) : "";
     const req = https.request(
-      "https://maqam.ajnasnb.com/api/proposal",
+      "https://ethonline.ajnasnb.com" + path,
       {
         method,
         headers: {
@@ -32,7 +32,7 @@ function call(method, body) {
         let data = "";
         res.on("data", (chunk) => {
           data += chunk;
-          if (data.length > 8192) req.destroy(new Error("Oversized response"));
+          if (data.length > 4100000) req.destroy(new Error("Oversized response"));
         });
         res.on("end", () => {
           try {
@@ -64,9 +64,19 @@ const mainnet = await call("POST", { ...input, chainId: 1 });
 assert.equal(mainnet.status, 400);
 const get = await call("GET");
 assert.equal(get.status, 405);
+const graph = await call("POST", { network: 84532, task: "treasury", minimumReviewers: 0 }, "/api/agents");
+assert.equal(graph.status, 200);
+assert.equal(graph.body.network, 84532);
+assert.ok(graph.body.candidates.length > 0);
+assert.ok(graph.body.indexedBlock > 0);
+const strictGraph = await call("POST", { network: 84532, task: "treasury", minimumReviewers: 5 }, "/api/agents");
+assert.equal(strictGraph.status, 200);
+assert.ok(strictGraph.body.candidates.every(a => !a.eligible || a.reviewers >= 5));
+const graphEvidence = { checkedAt: new Date().toISOString(), url: "https://ethonline.ajnasnb.com/api/agents", indexedBlock: graph.body.indexedBlock, total: graph.body.candidates.length, exploratoryEligible: graph.body.candidates.filter(a => a.eligible).map(a => a.id), strictEligible: strictGraph.body.candidates.filter(a => a.eligible).map(a => a.id), snapshotHash: graph.body.snapshotHash };
+fs.writeFileSync("evidence/live-graph-api.json", JSON.stringify(graphEvidence, null, 2) + "\n");
 const record = {
   checkedAt: new Date().toISOString(),
-  url: "https://maqam.ajnasnb.com/api/proposal",
+  url: "https://ethonline.ajnasnb.com/api/proposal",
   dnsResolver: "1.1.1.1 (normal TLS certificate validation)",
   allowed,
   oversized,
@@ -78,5 +88,5 @@ fs.writeFileSync(
   JSON.stringify(record, null, 2) + "\n",
 );
 console.log(
-  "Live API passed: allowed testnet proposal, policy budget rejection, mainnet rejection, method rejection.",
+  "Live APIs passed: testnet policy, budget rejection, mainnet rejection, method rejection, fresh Graph screening and strict reviewer policy.",
 );

@@ -111,7 +111,8 @@ export function initGraphView(onSelect) {
         results.append(
           node("p", "No registrations returned. Try the other test network."),
         );
-      for (const candidate of data.candidates.slice(0, 12)) {
+      results.append(node("p", "Showing the four highest-ranked candidates from this 50-registration sample. Full results are in the evidence below.", "graph-scope"));
+      for (const candidate of data.candidates.slice(0, 4)) {
         const card = node("article", "", "graph-card");
         card.append(
           node("p", `${candidate.decision} · ${candidate.id}`, "eyebrow"),
@@ -122,7 +123,7 @@ export function initGraphView(onSelect) {
         card.append(
           node(
             "p",
-            `Matched terms: ${candidate.matchedTerms.join(", ") || "none requested"} · Distinct non-owner reviewers: ${candidate.reviewers}`,
+            `Matched terms: ${candidate.matchedTerms.join(", ") || "none"} · Distinct non-owner reviewers: ${candidate.reviewers}`,
             "small-muted",
           ),
         );

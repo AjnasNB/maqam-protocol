@@ -114,7 +114,7 @@ export async function discoverAgents(
     `https://gateway.thegraph.com/api/subgraphs/id/${source.id}`,
     {
       method: "POST",
-      redirect: "error",
+      redirect: "manual",
       signal: AbortSignal.timeout(15000),
       headers: {
         "Content-Type": "application/json",
