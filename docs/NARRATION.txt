@@ -1,0 +1,43 @@
+MAQAM PROTOCOL — RECORDED-PROOF WALKTHROUGH
+Speak these words yourself. This is a suggested human narration, not an audio file.
+Aim for roughly 3 minutes; rehearse and check the actual recording duration.
+The bracketed lines are screen actions, not spoken words.
+This version accurately demonstrates the retained execution evidence. Do not call it a new live payment.
+
+[0:00 — Show the Maqam app opening screen.]
+
+Maqam Protocol gives an AI agent permission to make one exact payment, without giving it unrestricted control over the owner's wallet.
+
+An agent may understand an invoice correctly and still make a dangerous transaction if its instructions change. Our question is simple: how do we make the executed payment match exactly what the person approved?
+
+[0:25 — Click Inspect agent proposal. Scroll until the complete panel is visible.]
+
+Here is a real recorded model response to a synthetic invoice. It proposes one USDC for one research report. The model receives no owner key and no signing tool. The prompt, response and policy decision are preserved so the demonstration can be inspected.
+
+This is a recorded model call, not a live model request happening while I speak.
+
+[0:55 — Click Use this sample proposal. Show the payment form.]
+
+The proposal fills in the recipient, amount and reason for the payment. In the wallet flow, the owner reviews the exact terms before signing. The signature binds the owner, authorized executor, recipient, token, amount, expiry, nonce, revocation epoch and evidence commitment. The signing domain also binds the chain and contract.
+
+Token allowance is separate and limited to the payment amount. The owner can revoke a pending authorization. The agent can submit the signed packet, but cannot change its terms.
+
+[1:35 — Click Verify testnet payment. Wait for VERIFIED AGAINST LIVE CHAIN.]
+
+This is the retained execution proof from Arc Testnet. A scripted owner signed, a separate executor submitted the transaction, and the recipient received exactly one test USDC.
+
+The changed recipient and doubled amount were rejected with InvalidSignature. Those rejection checks were simulations, so they did not spend gas. The correct payment was actually mined.
+
+After execution, replay fails because the nonce has been consumed. That protection still holds when the executor bypasses the Maqam application and calls the contract directly.
+
+[2:20 — Point to the live verification badge, accounts and transaction link.]
+
+The browser checks the mined receipt and consumed nonce against Arc's live RPC. Arc is the actual settlement layer here, with USDC used for both payments and executor gas.
+
+[2:40 — Scroll to How it works.]
+
+This is a continuity build extending my existing Maqam library. The onchain executor, wallet interface, Arc integration and adversarial tests are new event work.
+
+The receipt proves that an executed payment matches its authorization. It does not prove an invoice is true, and this is an unaudited testnet prototype. The next step is to apply this exact authorization boundary to more agent tools and audit it for production use.
+
+[Stop. Check total duration, voice, image clarity and absence of browser/Codex chrome before export.]

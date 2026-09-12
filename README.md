@@ -36,7 +36,7 @@ Open `http://127.0.0.1:5186`. `npm run build` creates the production frontend. V
 
 The primary public app uses Cloudflare Workers and Static Assets at `ethonline.ajnasnb.com` (with `maqam.ajnasnb.com` as an alias). `worker.mjs` adapts the exact same policy handler and bounds streamed request bodies to 4 KB. Vercel remains a git-deployed mirror at https://maqam-protocol.vercel.app; its default hostname timed out from the development connection. To update the primary deployment, build and run `wrangler deploy` with an authenticated Wrangler 4 CLI. Review `wrangler.jsonc` before deploying from a different account. GitHub CI verifies the code; the Cloudflare deployment currently requires this explicit command.
 
-The 16 tests exercise actual EVM executions: payment and event consistency, every signed field, executor and domain restrictions, expiry, nonce cancellation, epoch revocation, transaction rollback, ERC-1271 owners, reentrancy, runtime-bytecode checks, network guards and Maqam policy review. Ganache may fall back to its JavaScript implementation on newer Node versions.
+The 16 tests cover EVM payment and event consistency, every signed field, executor and domain restrictions, expiry, nonce cancellation, epoch revocation, transaction rollback, ERC-1271 owners, reentrancy, runtime-bytecode checks, network guards, Maqam policy review and the Worker adapter. Ganache may fall back to its JavaScript implementation on newer Node versions.
 
 ```sh
 npm run proof        # fresh local chain, Maqam approval queue and adversarial proof
@@ -61,3 +61,5 @@ The 25-token review threshold is application policy, not a global onchain spendi
 The earlier [Maqam](https://github.com/AjnasNB/maqam) TypeScript library implements application-side policy, exact approvals, and receipts. This project's new contribution is contract-enforced authorization, typed wallet signing, a payment interface, adversarial demonstrations, and independently inspectable chain receipts. We will identify every reused dependency and every completed integration; no prior project code is represented as new event work.
 
 See [the implementation specification](docs/SPEC.md), [AI assistance disclosure](docs/AI-ASSISTANCE.md), and [human contribution checklist](docs/HUMAN-CONTRIBUTIONS.md). Human testing and a human-narrated demo remain required before a compliant final submission. No unimplemented sponsor integration is claimed.
+
+For the final walkthrough, use the [hands-on test and real Chrome recording guide](docs/TEST-AND-RECORD.md) and [human narration script](docs/NARRATION.txt). The script distinguishes retained model/payment evidence from live chain verification.
