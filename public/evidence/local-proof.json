@@ -1,0 +1,77 @@
+{
+  "generatedAt": "2026-09-12T09:01:11.507Z",
+  "environment": "Ephemeral local Ganache EVM. NOT a public testnet deployment.",
+  "chainId": 31337,
+  "compiler": "0.8.37+commit.f401782d.Emscripten.clang",
+  "contract": "0x58FB7070fE962eeFD5C71230757D6a892CF5B9bd",
+  "token": "0x3A06b2e98F63Aa1a50a0a8A4EBc4a3FcCd9b00DA",
+  "proposal": {
+    "assessment": {
+      "allowed": true,
+      "code": "REVIEW_REQUIRED",
+      "reason": "Within policy. A person must approve the exact payment."
+    },
+    "governance": {
+      "library": "maqam",
+      "version": "0.3.3",
+      "tool": "payment.evaluate",
+      "boundary": "proposal policy; execution requires onchain signature"
+    }
+  },
+  "authorization": {
+    "owner": "0x4c9e66857Ea0aFC93230C4e1Ffa90b5E9467f457",
+    "executor": "0xd5A83A0E4dEF4eB5E7D8C1d3691826cf63FF0606",
+    "recipient": "0x4f162f3225E3397F0243F9d878A0895550b28901",
+    "token": "0x3A06b2e98F63Aa1a50a0a8A4EBc4a3FcCd9b00DA",
+    "amount": "1000000",
+    "nonce": "2048",
+    "epoch": "0",
+    "deadline": 1789204270,
+    "evidenceHash": "0xa1bba150a4f24795c319b5a268d58256cf026ed6c6e219fe55f80a589e6fafdb"
+  },
+  "signature": "0xa9681421c235c1a8ee147791151f3dcb1d528cc15d741d437548f5a58369b9b5672a0b717aa9b67f0f779e85f059b8026baf55c43d3f3806e027e22b3fca03c01c",
+  "authorizationDigest": "0x9315a2b63120b0708a72adcf9044541da90df03e50ddd1570c5e71d74a5604d9",
+  "results": [
+    {
+      "test": "Maqam blocks unapproved dispatch",
+      "code": "APPROVAL_REQUIRED",
+      "passed": true
+    },
+    {
+      "test": "Maqam rejects altered input",
+      "code": "APPROVAL_SCOPE_MISMATCH",
+      "passed": true
+    },
+    {
+      "test": "Contract rejects recipient replacement",
+      "code": "InvalidSignature",
+      "method": "eth_call",
+      "passed": true
+    },
+    {
+      "test": "Contract rejects doubled amount",
+      "code": "InvalidSignature",
+      "method": "eth_call",
+      "passed": true
+    },
+    {
+      "test": "Exact approved payment transfers 1 mUSD",
+      "method": "mined local EVM transaction",
+      "passed": true,
+      "transactionHash": "0x8db358ddaabb7e384a630d3459538694ffa5d6843385380cffa8ebfd636fc66e",
+      "blockNumber": 5,
+      "status": 1
+    },
+    {
+      "test": "Maqam rejects replay",
+      "code": "APPROVAL_INVALID",
+      "passed": true
+    },
+    {
+      "test": "Contract rejects replay even when bypassing Maqam",
+      "code": "NonceUnavailable",
+      "method": "eth_call",
+      "passed": true
+    }
+  ]
+}
