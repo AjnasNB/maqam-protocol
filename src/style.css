@@ -772,3 +772,76 @@ footer {
     transition: none !important;
   }
 }
+/* Live agent discovery shares the payment workspace's visual language. */
+.graph-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 20px;
+}
+.graph-form button {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+.graph-results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.graph-card {
+  padding: 24px;
+  border: 1px solid #ccd6cf;
+  border-radius: 12px;
+  background: #fff;
+}
+.graph-card h3 {
+  margin: 8px 0 12px;
+}
+.graph-card p {
+  overflow-wrap: anywhere;
+}
+.graph-card code {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  margin: 12px 0;
+}
+.graph-reason {
+  font-weight: 600;
+}
+.graph-consent {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  font-size: 13px;
+  margin: 18px 0;
+}
+.graph-consent input {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.graph-results details {
+  grid-column: 1 / -1;
+}
+.graph-results pre {
+  overflow: auto;
+  max-height: 320px;
+  font-size: 12px;
+}
+.graph-selection {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0 50px;
+}
+@media (max-width: 760px) {
+  .graph-form,
+  .graph-results {
+    grid-template-columns: 1fr;
+  }
+  .graph-selection {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

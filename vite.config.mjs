@@ -1,10 +1,36 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import { evaluateProposal } from "./src/governance.mjs";
+import agentsHandler from "./api/agents.mjs";
 export default defineConfig({
   plugins: [
     {
       name: "local-governance-api",
       configureServer(server) {
+        server.middlewares.use("/api/agents", (req, res) => {
+          let body = "";
+          req.on("data", (chunk) => {
+            body += chunk;
+            if (Buffer.byteLength(body) > 4096) req.destroy();
+          });
+          req.on("end", async () => {
+            const reply = {
+              setHeader: (k, v) => res.setHeader(k, v),
+              status(code) {
+                res.statusCode = code;
+                return this;
+              },
+              json(value) {
+                res.setHeader("Content-Type", "application/json");
+                res.end(JSON.stringify(value));
+              },
+            };
+            await agentsHandler(
+              { method: req.method, headers: req.headers, body },
+              reply,
+              { ...loadEnv("development", process.cwd(), ""), ...process.env },
+            );
+          });
+        });
         server.middlewares.use("/api/proposal", (req, res, next) => {
           if (req.method !== "POST") {
             res.statusCode = 405;

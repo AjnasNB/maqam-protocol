@@ -20,8 +20,8 @@
         ><span>maqam<span class="brand-sub">PROTOCOL</span></span></a
       >
       <nav aria-label="Main navigation">
-        <a href="#workspace">Workspace</a><a href="#proof">Attack lab</a
-        ><a href="#architecture">How it works</a
+        <a href="#discovery">Find an agent</a><a href="#workspace">Workspace</a
+        ><a href="#proof">Attack lab</a><a href="#architecture">How it works</a
         ><a
           href="https://github.com/AjnasNB/maqam-protocol"
           target="_blank"
@@ -46,6 +46,61 @@
           <p>Approval is a boundary.<br />Not a blank cheque.</p>
           <span class="small-muted">Recipient · amount · chain · expiry</span>
         </aside>
+      </section>
+      <section id="discovery" aria-labelledby="discovery-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">THE GRAPH / LIVE AGENT DISCOVERY</p>
+            <h2 id="discovery-heading">Know who you’re authorizing.</h2>
+          </div>
+        </div>
+        <p class="lede">
+          Find registered agents, screen their declared capabilities, and bind
+          the discovery evidence to an exact payment.
+        </p>
+        <form id="graph-form" class="panel graph-form">
+          <div>
+            <label for="graph-task">What should the agent do?</label
+            ><input
+              id="graph-task"
+              maxlength="200"
+              placeholder="For example: research"
+              autocomplete="off"
+            />
+          </div>
+          <div>
+            <label for="graph-network">Registry network</label
+            ><select id="graph-network">
+              <option value="84532">Base Sepolia</option>
+            </select>
+          </div>
+          <div>
+            <label for="graph-reviewers">Minimum distinct reviewers</label
+            ><select id="graph-reviewers">
+              <option value="0">0 · exploratory screening</option>
+              <option value="2">2 · stricter screening</option>
+              <option value="5">5 · stricter screening</option>
+            </select>
+          </div>
+          <button type="submit" id="graph-search" class="primary">
+            Discover & screen ↗
+          </button>
+        </form>
+        <p id="graph-status" class="status" role="status" aria-live="polite">
+          Live Graph queries only. Registry claims and feedback are screening
+          signals, not proof of trustworthiness.
+        </p>
+        <div id="graph-results" class="graph-results"></div>
+        <button type="button" id="graph-model">
+          Inspect model reasoning from Graph evidence
+        </button>
+        <div id="graph-model-result" class="agent-evidence" hidden></div>
+        <div class="graph-selection">
+          <p id="graph-selected">
+            No agent selected. Manual payments remain available below.
+          </p>
+          <button type="button" id="graph-clear">Clear agent selection</button>
+        </div>
       </section>
       <section id="workspace" aria-labelledby="workspace-heading">
         <div class="section-heading">
@@ -321,7 +376,7 @@ Invoice INV-2048 · one research report</textarea>
     <footer>
       <span>Maqam Protocol · ETHOnline 2026</span
       ><span
-        >Continuity build · AI assistance disclosed · Testnet prototype</span
+        >New ETHOnline build · AI assistance disclosed · Testnet prototype</span
       ><a
         href="https://github.com/AjnasNB/maqam-protocol/blob/main/docs/AI-ASSISTANCE.md"
         >Build provenance ↗</a

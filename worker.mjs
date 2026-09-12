@@ -1,9 +1,12 @@
 import proposalHandler from "./api/proposal.mjs";
+import agentsHandler from "./api/agents.mjs";
 
 // Adapt the same policy endpoint to Workers without forwarding to Vercel.
 export default {
   async fetch(request, env) {
-    if (new URL(request.url).pathname !== "/api/proposal")
+    const path = new URL(request.url).pathname;
+    const handler = path === "/api/agents" ? agentsHandler : proposalHandler;
+    if (path !== "/api/proposal" && path !== "/api/agents")
       return env.ASSETS.fetch(request);
     const headers = new Headers({
       "Cache-Control": "no-store",
@@ -23,7 +26,7 @@ export default {
       },
     };
     if (request.method !== "POST")
-      return proposalHandler({ method: request.method, headers: {} }, res);
+      return handler({ method: request.method, headers: {} }, res, env);
     const reader = request.body?.getReader();
     let body = "",
       size = 0;
@@ -41,7 +44,7 @@ export default {
           body += decoder.decode(value, { stream: true });
         }
       body += decoder.decode();
-      return await proposalHandler({ method: "POST", headers: {}, body }, res);
+      return await handler({ method: "POST", headers: {}, body }, res, env);
     } catch {
       return res.status(400).json({ error: "Invalid proposal request" });
     } finally {

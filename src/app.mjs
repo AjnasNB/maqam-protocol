@@ -1,4 +1,6 @@
 import { matchesRuntimeBytecode } from "./bytecode.mjs";
+import { initGraphView, refreshGraphSelection } from "./graph-view.mjs";
+import { validateGraphEvidence } from "./graph-evidence.mjs";
 import { showPublicProof, showAgentProposal } from "./proof-viewer.mjs";
 import {
   BrowserProvider,
@@ -256,6 +258,13 @@ function renderPacket() {
     Nonce: String(a.nonce),
     Epoch: String(a.epoch),
     Evidence: a.evidenceHash,
+    Purpose: packet.note || "Imported authorization",
+    ...(packet.graphEvidence
+      ? {
+          "Graph agent": packet.graphEvidence.agentId,
+          "Graph snapshot": packet.graphEvidence.snapshotHash,
+        }
+      : {}),
     Digest: digest(packet.chainId, packet.contract, a),
   }))
     addRow($("summary"), k, v);
@@ -298,14 +307,19 @@ async function review() {
     : owner;
   if (executor === ZeroAddress || recipient === ZeroAddress)
     throw new Error("Recipient and executor must not be the zero address.");
-  const note = $("note").value.trim();
-  if (!note) throw new Error("Describe what this payment is for.");
+  const memo = $("note").value.trim();
+  if (!memo) throw new Error("Describe what this payment is for.");
+  const graphEvidence = await refreshGraphSelection(recipient);
+  const note = graphEvidence
+    ? `${memo}\nGraph agent: ${graphEvidence.agentId}\nGraph snapshot: ${graphEvidence.snapshotHash}`
+    : memo;
   const block = await provider.getBlock("latest");
   packet = {
     version: 1,
     chainId,
     contract: await c.getAddress(),
     note,
+    ...(graphEvidence ? { graphEvidence } : {}),
     authorization: {
       owner,
       executor,
@@ -484,7 +498,7 @@ function download() {
 async function importPacket(file) {
   await ensureWallet();
   if (!file) return;
-  if (file.size > 30000) throw new Error("Packet exceeds 30 KB.");
+  if (file.size > 2100000) throw new Error("Packet exceeds 2.1 MB.");
   const p = JSON.parse(await file.text());
   if (
     p.version !== 1 ||
@@ -499,6 +513,7 @@ async function importPacket(file) {
   digest(p.chainId, p.contract, p.authorization);
   if (p.note && evidenceHash(p.note) !== p.authorization.evidenceHash)
     throw new Error("Evidence text does not match signed commitment.");
+  validateGraphEvidence(p);
   packet = p;
   executed = false;
   $("contract").value = p.contract;
@@ -584,3 +599,13 @@ setNetwork();
 
 $("public-proof").onclick = () => action(showPublicProof);
 $("agent-proposal").onclick = () => action(showAgentProposal);
+initGraphView((candidate) => {
+  invalidate();
+  if (candidate) {
+    $("recipient").value = candidate.wallet;
+    $("note").value = `Reviewed testnet service payment · ${candidate.id}`;
+    status(
+      "Agent wallet selected. Verify your invoice and payment network, then review the exact payment.",
+    );
+  }
+});
