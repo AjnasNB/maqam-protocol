@@ -1,11 +1,11 @@
 {
-  "checkedAt": "2026-09-12T10:14:55.299Z",
+  "checkedAt": "2026-09-12T16:23:56.936Z",
   "url": "https://ethonline.ajnasnb.com/api/agents",
-  "indexedBlock": 46719900,
+  "indexedBlock": 46730973,
   "total": 50,
   "exploratoryEligible": [
     "84532:9201"
   ],
   "strictEligible": [],
-  "snapshotHash": "0x02a3e57743a0bf8f0710ca6e334040ea2885b489ec03b9488dafa2c62bd89dfc"
+  "snapshotHash": "0x75455c7319ebe4fd6d64bbb863bf27a40cdd0989681943254cea15a05813e1f9"
 }

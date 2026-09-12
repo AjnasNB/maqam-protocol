@@ -1,10 +1,10 @@
 # Test and record the real Chrome demo
 
-Open https://ethonline.ajnasnb.com in Chrome. No video has been recorded yet. This guide uses real screen capture, not generated animation, a screenshot slideshow, or synthetic narration.
+Open https://ethonline.ajnasnb.com in Chrome. A real silent 02:48 Chrome demo has been exported in Clipchamp; human narration and upload are pending. This guide uses real screen capture, not generated animation, a screenshot slideshow, or synthetic narration.
 
 ## What is already verified
 
-Twenty-two automated tests pass; current CI status is tracked separately. A separate scripted executor settled a real Arc Testnet USDC payment. The deployed contract is fully source-verified. The public receipt viewer has verified the mined event and consumed nonce against Arc RPC. These checks do not replace your own wallet walkthrough or prove that every wallet/browser combination works.
+Thirty-two automated tests pass; current CI status is tracked separately. A separate scripted executor settled a real Arc Testnet USDC payment. The deployed contract is fully source-verified. The public receipt viewer has verified the mined event and consumed nonce against Arc RPC. These checks do not replace your own wallet walkthrough or prove that every wallet/browser combination works.
 
 ## Your hands-on test (about 10–15 minutes)
 
