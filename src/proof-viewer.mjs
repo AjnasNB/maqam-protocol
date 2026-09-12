@@ -84,6 +84,12 @@ export async function showPublicProof() {
     "field-help",
   );
   area.append(disclaimer);
+  area.scrollIntoView({
+    behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? "instant"
+      : "smooth",
+    block: "start",
+  });
   let provider;
   try {
     provider = new JsonRpcProvider(networks[5042002].rpc);
@@ -159,7 +165,11 @@ export async function showAgentProposal() {
     $("note").value = record.output.memo;
     $("status").textContent =
       "Sample proposal loaded from a recorded real model call. Review before signing; the sample recipient is a valueless test fixture.";
-    $("workspace").scrollIntoView({ behavior: "smooth" });
+    $("workspace").scrollIntoView({
+      behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "instant"
+        : "smooth",
+    });
   };
   area.append(use);
 }

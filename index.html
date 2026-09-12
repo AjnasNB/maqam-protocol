@@ -9,6 +9,7 @@
       content="Approve exactly what your agent can do. Testnet payment authorization with tamper rejection, revocation, and verifiable receipts."
     />
     <title>Maqam Protocol — Your intent. Enforced.</title>
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
@@ -52,7 +53,7 @@
             <p class="eyebrow">01 / AUTHORIZE</p>
             <h2 id="workspace-heading">A payment you can stand behind.</h2>
           </div>
-          <button id="connect" class="primary">
+          <button type="button" id="connect" class="primary">
             Connect testnet wallet <span>↗</span>
           </button>
         </div>
@@ -108,7 +109,13 @@
               <div>
                 <label for="amount"
                   >Amount <span id="token-label">USDC</span></label
-                ><input id="amount" inputmode="decimal" value="1.00" required />
+                ><input
+                  id="amount"
+                  autocomplete="off"
+                  inputmode="decimal"
+                  value="1.00"
+                  required
+                />
               </div>
               <div>
                 <label for="expiry">Expires after</label
@@ -187,11 +194,13 @@ Invoice INV-2048 · one research report</textarea>
                 <label for="contract">Maqam executor contract</label
                 ><input
                   id="contract"
+                  autocomplete="off"
                   placeholder="Deploy or enter a verified contract address"
                   spellcheck="false"
                 /><label for="token">Token contract</label
                 ><input
                   id="token"
+                  autocomplete="off"
                   value="0x3600000000000000000000000000000000000000"
                   spellcheck="false"
                 /><button id="deploy" type="button" class="secondary wide">
@@ -230,17 +239,17 @@ Invoice INV-2048 · one research report</textarea>
           spend gas.
         </p>
         <div class="attacks">
-          <button class="attack" id="attack-recipient" disabled>
+          <button type="button" class="attack" id="attack-recipient" disabled>
             <span>01</span>
             <h3>Change the recipient</h3>
             <p>Same approval. Different destination.</p>
             <strong>Test rejection ↗</strong></button
-          ><button class="attack" id="attack-amount" disabled>
+          ><button type="button" class="attack" id="attack-amount" disabled>
             <span>02</span>
             <h3>Double the amount</h3>
             <p>Same approval. Twice the payment.</p>
             <strong>Test rejection ↗</strong></button
-          ><button class="attack" id="attack-replay" disabled>
+          ><button type="button" class="attack" id="attack-replay" disabled>
             <span>03</span>
             <h3>Use it a second time</h3>
             <p>Execute once. Then try again.</p>
@@ -258,7 +267,7 @@ Invoice INV-2048 · one research report</textarea>
             <p class="eyebrow">03 / VERIFY</p>
             <h2 id="receipt-heading">A receipt, not a promise.</h2>
           </div>
-          <button id="load-evidence" class="secondary">
+          <button type="button" id="load-evidence" class="secondary">
             Inspect recorded EVM proof
           </button>
         </div>
