@@ -4,9 +4,9 @@ Updated September 12, 2026. **Not finally submitted.**
 
 ## Current update
 
-- The project track was changed and saved as **Building from Scratch**, with the public-library exception documented in BUILD-PROVENANCE.md. The participant profile still reports Continuity; changing it is blocked by a human-verification challenge on the Dashboard.
+- The project track was changed and saved as **Building from Scratch**, with the public-library exception documented in BUILD-PROVENANCE.md. The participant profile was also changed to Building from Scratch after the Dashboard became available; the mismatch warning disappeared. The Dashboard now shows both Arc and The Graph and the updated tagline.
 - Arc and The Graph are both selected and their integration answers saved. Graph live data, screening, recorded model analysis and evidence commitments are implemented. See GRAPH-INTEGRATION.md.
-- 22 automated tests pass across the existing suite and six Graph tests. Cloudflare redirect behavior was caught by public Chrome testing and corrected. Public API checks now pass for exploratory and strict Graph screening.
+- 22 automated tests pass across the full suite. GitHub CI also passed for revision `4f2c52c` (run 34688136068). Cloudflare redirect behavior was caught by public Chrome testing and corrected. Public API checks now pass for exploratory and strict Graph screening.
 - Public Worker version: `421df54d-a0f4-4a42-b6a2-b5858c0b89dc`. The primary hostname is the submission target; Graph credentials are configured there, not in the optional Vercel mirror.
 - Clipchamp is open with microphone OFF, but native browser permission/capture selection is pending. **No video has been recorded.** Human narration is still required for the eventual submission.
 
@@ -28,7 +28,7 @@ Updated September 12, 2026. **Not finally submitted.**
 
 1. Participant personally tests the app and records actual findings in `HUMAN-CONTRIBUTIONS.md`. Automated fixture signing is not a human test.
 2. Record and upload a 2–4 minute screen demo with the participant's own narration at 720p or better. No AI voice, speed-up, phone recording or music-only demo. Follow `DEMO-SCRIPT.md` and describe recorded evidence honestly.
-3. Match the participant profile to Building from Scratch, then review the final declaration with the public-library exception and prior dependency disclosure. The checkbox remains unchecked pending the complete entry.
+3. The participant and project tracks now both match Building from Scratch. Review the final declaration with the public-library exception and prior dependency disclosure. The checkbox remains unchecked pending the complete entry.
 4. Review the complete entry and submit before **September 13, 2026, 16:00 UTC / 21:30 IST**. Verify a final submitted confirmation. Finalist selection also requires participation in live judging.
 
 ## Connectivity note
