@@ -1,0 +1,49 @@
+{
+  "checkedAt": "2026-09-12T09:34:12.865Z",
+  "url": "https://maqam.ajnasnb.com/api/proposal",
+  "dnsResolver": "1.1.1.1 (normal TLS certificate validation)",
+  "allowed": {
+    "status": 200,
+    "body": {
+      "assessment": {
+        "allowed": true,
+        "code": "REVIEW_REQUIRED",
+        "reason": "Within policy. A person must approve the exact payment."
+      },
+      "governance": {
+        "library": "maqam",
+        "version": "0.3.3",
+        "tool": "payment.evaluate",
+        "boundary": "proposal policy; execution requires onchain signature"
+      }
+    }
+  },
+  "oversized": {
+    "status": 200,
+    "body": {
+      "assessment": {
+        "allowed": false,
+        "code": "BUDGET_EXCEEDED",
+        "reason": "This proposal exceeds the configured per-payment limit."
+      },
+      "governance": {
+        "library": "maqam",
+        "version": "0.3.3",
+        "tool": "payment.evaluate",
+        "boundary": "proposal policy; execution requires onchain signature"
+      }
+    }
+  },
+  "mainnet": {
+    "status": 400,
+    "body": {
+      "error": "Unsupported chain 1. This application only permits testnets."
+    }
+  },
+  "get": {
+    "status": 405,
+    "body": {
+      "error": "Use POST"
+    }
+  }
+}

@@ -23,6 +23,7 @@ The new contracts, EIP-712 client, wallet UX, policy endpoint, adversarial tests
 
 - Vite builds the static browser interface. It requests wallet signatures and testnet transactions through an injected EIP-1193 wallet.
 - `/api/proposal` runs the real Maqam library in a Vercel function and applies a 25-token per-payment review policy. This endpoint does not sign or transfer funds and does not receive invoice text.
+- The primary `maqam.ajnasnb.com` deployment serves the same endpoint through Cloudflare Workers and serves the Vite build as Static Assets. The Worker bounds request bodies to 4 KB and calls the shared Vercel-compatible handler directly. Vercel remains a deployment mirror.
 - The Solidity contract validates owner, executor, token, recipient, amount, nonce, expiry, epoch and evidence commitment. The EIP-712 domain binds chain and verifier.
 - The contract uses OpenZeppelin SafeERC20, SignatureChecker (including ERC-1271), EIP712 and ReentrancyGuard. It contains no administrator, upgrade proxy or fund-withdrawal authority.
 - An optional local model adapter accepts an OpenAI-compatible endpoint and credentials. The retained demonstration used a real Azure OpenAI GPT-5.6 Sol call on a synthetic invoice. The hosted UI exposes the recorded proposal and its complete prompt/output, rather than pretending it is a live AI service.

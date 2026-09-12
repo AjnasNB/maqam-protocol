@@ -8,7 +8,7 @@ Built during ETHOnline, beginning September 12, 2026. This is an unaudited testn
 
 ## Try the working project
 
-- **[Live app](https://maqam-protocol.vercel.app)** — choose “Verify testnet payment” to verify a real receipt against Arc without connecting a wallet.
+- **[Live app](https://maqam.ajnasnb.com)** — choose “Verify testnet payment” to verify a real receipt against Arc without connecting a wallet.
 - **[Actual USDC payment](https://testnet.arcscan.app/tx/0x29df2d8d76cc95eca476461b45de397d4ca0cc565640edf8d86f80b609d4826e)** — a separately funded executor settled the owner's exact signed authorization.
 - **[Fully source-verified Arc contract](https://testnet.arcscan.app/address/0x8267D3D996e4884BBc7E88307a46A957AC95ea2b?tab=contract)** — Solidity 0.8.36, chain 5042002. [Verification evidence](public/evidence/source-verification.json).
 - [Architecture and trust boundaries](docs/ARCHITECTURE.md), [human demo script](docs/DEMO-SCRIPT.md), [Arc feedback](FEEDBACK.md).
@@ -34,7 +34,9 @@ npm run dev
 
 Open `http://127.0.0.1:5186`. `npm run build` creates the production frontend. Vercel serves `api/proposal.mjs`, a real Maqam policy endpoint; the Vite development server provides the same route.
 
-The 15 tests exercise actual EVM executions: payment and event consistency, every signed field, executor and domain restrictions, expiry, nonce cancellation, epoch revocation, transaction rollback, ERC-1271 owners, reentrancy, runtime-bytecode checks, network guards and Maqam policy review. Ganache may fall back to its JavaScript implementation on newer Node versions.
+The primary public app uses Cloudflare Workers and Static Assets at `maqam.ajnasnb.com`. `worker.mjs` adapts the exact same policy handler and bounds streamed request bodies to 4 KB. Vercel remains a git-deployed mirror at https://maqam-protocol.vercel.app; its default hostname timed out from the development connection. To update the primary deployment, build and run `wrangler deploy` with an authenticated Wrangler 4 CLI. Review `wrangler.jsonc` before deploying from a different account. GitHub CI verifies the code; the Cloudflare deployment currently requires this explicit command.
+
+The 16 tests exercise actual EVM executions: payment and event consistency, every signed field, executor and domain restrictions, expiry, nonce cancellation, epoch revocation, transaction rollback, ERC-1271 owners, reentrancy, runtime-bytecode checks, network guards and Maqam policy review. Ganache may fall back to its JavaScript implementation on newer Node versions.
 
 ```sh
 npm run proof        # fresh local chain, Maqam approval queue and adversarial proof

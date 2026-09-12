@@ -4,7 +4,7 @@ Record your screen at 1080p or at least 720p with your own voice. Do not use AI 
 
 ## Before recording
 
-1. Open https://maqam-protocol.vercel.app and test the proof viewer.
+1. Open https://maqam.ajnasnb.com and test the proof viewer.
 2. Read the architecture and inspect the actual transaction in the explorer. Be ready to explain each field and limitation.
 3. For a live wallet walkthrough, use only Arc Testnet. Obtain faucet USDC, connect your wallet, and use the published executor. Test with 1 USDC or less. Use a recipient you control, or the clearly labeled valueless test recipient in the sample.
 4. Run tamper checks before executing, then replay after execution. If your wallet is a different address from the executor, reconnect and import the exported signed packet.

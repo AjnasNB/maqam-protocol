@@ -6,5 +6,7 @@ data/
 .vercel/
 *.log
 coverage/
+.wrangler/
+worker-configuration.d.ts
 
 .vercel
