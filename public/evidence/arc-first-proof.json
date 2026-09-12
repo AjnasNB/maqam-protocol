@@ -1,0 +1,84 @@
+{
+  "generatedAt": "2026-09-12T09:04:33.209Z",
+  "environment": "Arc Testnet — valueless test USDC",
+  "chainId": 5042002,
+  "contract": "0x69B538694c740F228a771BcD7925c4E68C1aC2dF",
+  "token": "0x3600000000000000000000000000000000000000",
+  "owner": "0xBf069B917C49ded7a5931FD3C4226A544A93D25B",
+  "executor": "0x7f676a86c306CC08a6808fCCba811391d6221Eb7",
+  "proposal": {
+    "assessment": {
+      "allowed": true,
+      "code": "REVIEW_REQUIRED",
+      "reason": "Within policy. A person must approve the exact payment."
+    },
+    "governance": {
+      "library": "maqam",
+      "version": "0.3.3",
+      "tool": "payment.evaluate",
+      "boundary": "proposal policy; execution requires onchain signature"
+    }
+  },
+  "authorization": {
+    "owner": "0xBf069B917C49ded7a5931FD3C4226A544A93D25B",
+    "executor": "0x7f676a86c306CC08a6808fCCba811391d6221Eb7",
+    "token": "0x3600000000000000000000000000000000000000",
+    "recipient": "0xad3117A01feFE725C8D1b5e23E22933753bd9FAA",
+    "amount": "1000000",
+    "nonce": "64183874204442947880490735575334765895",
+    "deadline": 1789205665,
+    "epoch": "0",
+    "evidenceHash": "0x4502d41cfeb88b272111851afd01db76d4c1577ffa2db3945eaf67195a6048d2"
+  },
+  "signature": "0x1c8f3c545b540f53902575206991db17747c7b2fd0717020efb5ce7656cd0d8c6e140df7cd3ec3886214b46f6a88c131b3b7ad541680d420759daf20c7d36a7a1c",
+  "authorizationDigest": "0x3a2659db35157281eea398482d671ccdf7eeafe448f8d29cc237c4c8a242352c",
+  "allowanceTransaction": "0xa66ee3a5ffb0346b76e8d0caf6b5a824d9b07ca356f70b6610efda66280d3fef",
+  "receipt": {
+    "transactionHash": "0x7b7af57dfe1442e6eb8adac223ec73f56ead2477ff4e6f370695d65400e04a12",
+    "blockNumber": 61705357,
+    "status": 1
+  },
+  "results": [
+    {
+      "test": "Maqam requires approval",
+      "code": "APPROVAL_REQUIRED",
+      "passed": true
+    },
+    {
+      "test": "Maqam blocks changed proposal",
+      "code": "APPROVAL_SCOPE_MISMATCH",
+      "passed": true
+    },
+    {
+      "test": "Recipient replacement",
+      "code": "InvalidSignature",
+      "method": "Arc Testnet eth_call",
+      "passed": true
+    },
+    {
+      "test": "Amount doubled",
+      "code": "InvalidSignature",
+      "method": "Arc Testnet eth_call",
+      "passed": true
+    },
+    {
+      "test": "Separate agent pays exactly 1 test USDC",
+      "method": "Mined Arc Testnet transaction",
+      "transactionHash": "0x7b7af57dfe1442e6eb8adac223ec73f56ead2477ff4e6f370695d65400e04a12",
+      "blockNumber": 61705357,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "test": "Maqam blocks replay",
+      "code": "APPROVAL_INVALID",
+      "passed": true
+    },
+    {
+      "test": "Contract blocks replay even bypassing Maqam",
+      "code": "NonceUnavailable",
+      "method": "Arc Testnet eth_call",
+      "passed": true
+    }
+  ]
+}

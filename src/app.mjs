@@ -1,3 +1,4 @@
+import {showPublicProof,showAgentProposal} from './proof-viewer.mjs';
 import {BrowserProvider,Contract,ContractFactory,JsonRpcProvider,parseUnits,formatUnits,getAddress,isAddress,hexlify,randomBytes,ZeroAddress} from 'ethers';
 import {types,domain,digest,evidenceHash,networks,requireTestnet,assessProposal} from './protocol.mjs';
 
@@ -42,3 +43,6 @@ $('load-evidence').onclick=()=>action(async()=>{const r=await fetch('/evidence/l
 for(const id of ['recipient','amount','expiry','note','executor','contract','token'])$(id).addEventListener('input',()=>{if(packet){invalidate();status('Inputs changed. Review and sign a fresh proposal.');}});
 if(window.ethereum?.on){window.ethereum.on('accountsChanged',()=>{signer=undefined;owner=undefined;invalidate();$('owner').textContent='Reconnect wallet';status('Wallet account changed. Reconnect to continue.');});window.ethereum.on('chainChanged',()=>{signer=undefined;invalidate();status('Wallet network changed. Reconnect to continue.');});}
 setNetwork();
+
+$('public-proof').onclick=()=>action(showPublicProof);
+$('agent-proposal').onclick=()=>action(showAgentProposal);
