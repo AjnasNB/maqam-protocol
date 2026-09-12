@@ -4,6 +4,9 @@ Updated September 12, 2026. **Not finally submitted.**
 
 ## Current update
 
+- The participant's MetaMask wallet completed a real 0.10 test-USDC self-payment on Arc, block 61761093. Tamper and replay simulations were blocked. The ETHOnline description of implementation was saved with this evidence and the 32-test verification. A second wallet cancellation test awaits confirmation. See `evidence/participant-wallet-test.json`.
+- `NARRATION.txt` now targets the actual 2:48 footage. It distinguishes the recorded 1-USDC fixture from the later participant payment and includes an optional wallet-segment script. The current video does not show wallet interaction.
+
 - The project track was changed and saved as **Building from Scratch**, with the public-library exception documented in BUILD-PROVENANCE.md. The participant profile was also changed to Building from Scratch after the Dashboard became available; the mismatch warning disappeared. The Dashboard now shows both Arc and The Graph and the updated tagline.
 - Arc and The Graph are both selected and their integration answers saved. Graph live data, screening, recorded model analysis and evidence commitments are implemented. See GRAPH-INTEGRATION.md.
 - 32 automated tests pass, including ten DOM/EVM integration tests. GitHub CI passed for `dab6fe1` (run 34705068739). Wallet state, packet import and Graph filter handling were hardened. See VERIFICATION-2026-09-12.md for evidence and limits.
@@ -26,7 +29,7 @@ Updated September 12, 2026. **Not finally submitted.**
 
 ## Required before final submission
 
-1. Participant personally tests the app and records actual findings in `HUMAN-CONTRIBUTIONS.md`. Automated fixture signing is not a human test.
+1. The supervised participant wallet payment is recorded in `HUMAN-CONTRIBUTIONS.md`. Independent participant review and feedback remain desirable; public-wallet cancellation is pending. Automated fixture signing is not a human test.
 2. Add the participant's own narration to the exported screen demo and upload the finished 2–4 minute video at 720p or better. No AI voice, speed-up, phone recording or music-only demo. Follow `NARRATION.txt` and describe recorded evidence honestly.
 3. The participant and project tracks now both match Building from Scratch. Review the final declaration with the public-library exception and prior dependency disclosure. The checkbox remains unchecked pending the complete entry.
 4. Review the complete entry and submit before **September 13, 2026, 16:00 UTC / 21:30 IST**. Verify a final submitted confirmation. Finalist selection also requires participation in live judging.

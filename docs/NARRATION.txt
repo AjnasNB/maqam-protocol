@@ -1,32 +1,34 @@
-MAQAM PROTOCOL — GRAPH + ARC DEMO
-Human narration for real Chrome capture. Target 3:00–3:30; rehearse at normal speed.
-Do not speak the bracketed actions. Silent footage needs your own voice added before submission.
+MAQAM — HUMAN NARRATION FOR THE EXISTING 2:48 CHROME VIDEO
 
-[0:00 — Opening screen, then Find an agent.]
-Maqam Protocol helps people discover agents and authorize one exact payment without handing over unrestricted wallet control. The Graph supplies live agent data. Arc enforces the payment.
+Read only the prose. Rehearse against Clipchamp and pause where needed. Do not speed up footage. This describes the existing recording, which does NOT show the later 0.10-USDC wallet transaction. Use your real voice.
 
-[0:20 — Search treasury with minimum reviewers zero.]
-This request queries The Graph's Agent0 Subgraph on Base Sepolia. The app screens the latest fifty registrations for an active profile, a registered agent wallet, and a match to the task. It shows the indexed block and retrieval time. This is live data, not a saved list.
+[0:00–0:15 — Opening]
+Maqam connects agent discovery to one exact payment authorization. The Graph supplies live agent data. Arc enforces the payment. A person decides what to approve, and the contract prevents the executor from changing those terms.
 
-The review decision is exploratory. An agent's description is self-declared, and feedback is not proof of trust. The app never substitutes the registration owner's address when an agent wallet is missing.
+[0:15–0:45 — Discovery, threshold zero]
+Here we query the Agent0 Subgraph on Base Sepolia for treasury work. Maqam screens the latest fifty registrations for an active profile, an explicit agent wallet, and a matching task. The page shows the indexed block and retrieval time. A match means review, not trust: descriptions are self-declared, and the registered owner is never substituted for a missing agent wallet.
 
-[0:55 — Change minimum reviewers to five and search again.]
-A stricter policy changes the decision. A matching agent without enough distinct reviewers is held. Stale data and indexing errors also stop discovery. The Graph therefore changes what the app permits us to propose.
+[0:45–1:10 — Stricter screening]
+Raising the minimum to five distinct reviewers holds this candidate. The Graph changes the decision, rather than just decorating the page. Stale indexing or query errors also stop discovery. Nobody has hired or paid this third-party agent in our demonstration.
 
-[1:20 — Click Inspect model reasoning from Graph evidence.]
-This panel preserves a real model analysis of an earlier live Graph query. The model recommended a treasury candidate for human review and explained the missing trust evidence. That model call is recorded, not running while I speak. The prompt, response and Graph snapshot can all be inspected.
+[1:10–1:40 — Recorded model analysis]
+This panel preserves a real model analysis of an earlier Graph snapshot. It recommends human review and explains the missing trust evidence. The model call is recorded; the discovery query was live. Its prompt, response, and supporting snapshot remain inspectable. A recommendation never gives the model authority to move funds.
 
-[1:50 — Workspace, show payment form. Do not select an unverified third-party invoice.]
-Before paying a selected agent, the person must independently verify the invoice and recipient. Review refreshes the Graph data and binds the selected agent and exact snapshot hash into the payment evidence.
+[1:40–1:55 — Payment workspace]
+For an agent payment, the person must verify the invoice and recipient. Review refreshes the Graph evidence. The signature binds its commitment together with the exact payment terms, chain, and contract.
 
-The signature also binds the owner, executor, token, amount, recipient, expiry, nonce and revocation epoch. The signing domain binds the chain and contract. The executor cannot change those terms.
+[1:55–2:25 — Existing Arc proof]
+Here is a separate, already-mined one-USDC test payment using controlled accounts. A scripted owner authorized it, and a different executor settled it. The browser verifies its receipt against live Arc RPC. Recorded simulations reject changed recipients, doubled amounts, and replay. The correct payment was actually mined. This fixture demonstrates execution, not payment for the discovered agent's services.
 
-[2:20 — Click Verify testnet payment. Wait for the live verification badge.]
-Here is a separate, already-mined Arc Testnet payment using controlled test accounts. We did not hire or pay the third-party agent shown in discovery. A scripted owner authorized one test USDC, and a separate executor settled it.
+[2:25–2:48 — Architecture and closing]
+The contract consumes the nonce once; cancellation and revocation can invalidate pending approvals. Thirty-two automated tests pass, and the participant's wallet has also completed a separate test payment. Maqam is a new ETHOnline application using a disclosed public library: an inspectable path from agent evidence to narrowly scoped authorization.
 
-The browser now verifies the receipt against live Arc RPC. Recorded checks show that changing the recipient or amount invalidates the signature, and replay fails after the nonce is consumed. The rejection checks were simulations; the correct payment was actually mined. Arc uses USDC for both payment and gas.
+RECORDING REVIEW / WALLET FOOTAGE
+The current silent export is 2:48, 1080p, 38.10 MB. Sampled opening, discovery, model, receipt and ending frames show Maqam; the browser toolbar and Codex are outside the crop. Black bands remain above and below the app. Check small proof text at full-screen playback. Human narration is still required. This is a sampled visual review, not a claim that every frame or final audio was inspected.
 
-[3:05 — Show How it works.]
-This new application was built during ETHOnline using the disclosed public Maqam library. It is a testnet prototype, not an audited production wallet. The result is an inspectable path from live agent data to a narrowly scoped payment authorization.
+To SHOW the wallet flow, record a replacement Chrome segment. Do not narrate wallet clicks over the old fixture. Capture the connected address and Arc Testnet, exact amount/recipient review, actual approval/signing, settlement confirmation/link, and replay rejection. A fresh payment requires a fresh authorization and actual confirmation. Existing transaction 0x916fa842aafebf1caf3b0aee628601755f16acf9223c509bd0b975a7fb52d678 can instead be shown explicitly as an already-completed payment.
 
-[Stop. Check the actual duration is 2–4 minutes, clear human voice, readable text, and no browser toolbar or Codex UI in the capture.]
+Optional replacement narration, ONLY with matching new footage:
+"This is my connected MetaMask wallet on Arc Testnet. The terms authorize a 0.10 test-USDC payment back to my own address. The transaction has confirmed on Arc, and the nonce is consumed. Trying to reuse the authorization is blocked. This is a real browser-wallet self-payment, separate from the earlier demonstration with different owner and executor accounts."
+
+Keep the final video between two and four minutes, at normal speed, with your human voice. Never show seed phrases, private keys, or unrelated wallet activity.

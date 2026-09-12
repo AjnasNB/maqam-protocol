@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-09-12T17:01:01.004Z",
+  "network": "Arc Testnet",
+  "chainId": 5042002,
+  "transactionHash": "0x916fa842aafebf1caf3b0aee628601755f16acf9223c509bd0b975a7fb52d678",
+  "blockNumber": 61761093,
+  "contract": "0x8267D3D996e4884BBc7E88307a46A957AC95ea2b",
+  "owner": "0x06F66Ce53eF70BdC9f98803851f7Ad7EEa1228d7",
+  "executor": "0x06F66Ce53eF70BdC9f98803851f7Ad7EEa1228d7",
+  "recipient": "0x06F66Ce53eF70BdC9f98803851f7Ad7EEa1228d7",
+  "amountUnits": "100000",
+  "decimals": 6,
+  "digest": "0x42f062b810267e5ae8469e2d23943fbc63a46071245b0a11593dfed035b98640",
+  "nonce": "135320549378284089838906018861162907002",
+  "evidenceHash": "0xb12d78e960bd41812deb8da88819b5471b9173954dcfaa8d4a5f6664bf2b4687",
+  "receiptStatus": 1,
+  "nonceConsumed": true,
+  "browserObservations": {
+    "recipientTampering": "InvalidSignature / BLOCKED",
+    "amountTampering": "InvalidSignature / BLOCKED",
+    "replay": "NonceUnavailable / BLOCKED"
+  },
+  "scope": "Real connected MetaMask wallet; participant confirmed wallet prompts while Codex operated the app. Self-payment, not a separate-executor test and not payment to a Graph-discovered agent. Tamper and replay checks were eth_call simulations."
+}
