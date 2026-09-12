@@ -4,7 +4,7 @@ Open https://ethonline.ajnasnb.com in Chrome. No video has been recorded yet. Th
 
 ## What is already verified
 
-Sixteen automated tests and GitHub CI pass. A separate scripted executor settled a real Arc Testnet USDC payment. The deployed contract is fully source-verified. The public receipt viewer has verified the mined event and consumed nonce against Arc RPC. These checks do not replace your own wallet walkthrough or prove that every wallet/browser combination works.
+Twenty-two automated tests pass; current CI status is tracked separately. A separate scripted executor settled a real Arc Testnet USDC payment. The deployed contract is fully source-verified. The public receipt viewer has verified the mined event and consumed nonce against Arc RPC. These checks do not replace your own wallet walkthrough or prove that every wallet/browser combination works.
 
 ## Your hands-on test (about 10–15 minutes)
 
@@ -38,7 +38,7 @@ Optional deeper check: export a signed packet with a different authorized execut
 5. Tab capture does not include wallet extension popups or a newly opened explorer tab. For the simplest recording, personally test the wallet flow beforehand and demonstrate the recorded proof clearly as recorded evidence. If demonstrating a fresh wallet flow, narrate the real confirmation and show the resulting app receipt; do not pretend invisible wallet UI was captured.
 6. Speak naturally using `DEMO-SCRIPT.md`. Aim for 2:45–3:15 at normal speed. No music or AI voice. Do not speed up footage.
 7. Stop recording, preview the whole video, and export **MP4 at 1080p** (minimum 720p). Check that exported text remains readable and audio is present; export resolution alone does not repair a low-resolution capture.
-8. Upload the actual MP4/MOV in ETHGlobal's Video section or provide its local path for upload. The final declaration's scratch-only wording still needs review against the selected Continuity Track. Do not falsely attest that the earlier Maqam library was new event work.
+8. Upload the actual MP4/MOV in ETHGlobal's Video section or provide its local path for upload. The project now uses Building from Scratch with the public-library exception documented in BUILD-PROVENANCE.md. The earlier library is not claimed as new work; the participant track must match.
 
 The browser capture picker and microphone permission require your interaction. Recording has not started simply because the Clipchamp editor is open. If you want an assisted demonstration, tell me when the recording is started and you are ready to narrate; I can operate the app tab while you speak.
 
@@ -46,8 +46,10 @@ Reference: https://support.microsoft.com/en-us/clipchamp/how-to-make-a-screen-re
 
 ## Track and sponsor choices
 
-Saved in ETHGlobal: **Continuity Track → Top 10 Finalist & Partner Prizes → Arc**. The exact target is **Best DeFi or Agentic Application (Continuity)**. Arc's $10,000 card is the overall sponsor pool, not the amount this entry wins. The relevant $3,000 bounty includes $2,000 conditional on deployment to Arc Mainnet by September 30; no mainnet action or commitment has been made.
+Building from Scratch. Arc targets Best DeFi/Onchain Finance Application; The Graph targets Best AI Tooling or AI Use Case (From Scratch). See BUILD-PROVENANCE.md and GRAPH-INTEGRATION.md for the factual basis. Hedera is not integrated or claimed.
 
-We already use Arc and USDC meaningfully. The Graph could support live risk/treasury data used in an approval decision, World AgentKit could add verified human-backed agent authorization, and Ledger could add hardware-backed approval. None is implemented or selected. Each would require a real integration, test evidence and demo changes; simply adding a logo, library or raw query would not qualify. Keep the current tested payment flow as the submission baseline.
+## Graph checks added
 
-Reference: https://ethglobal.com/events/ethonline2026/prizes
+Search treasury at reviewer threshold zero, then five. Inspect the live block/time and the changed decision. Inspect the recorded model reasoning separately. Do not confirm an invoice agreement you have not established. A fresh Graph-selected wallet payment has not been manually verified.
+
+For the current combined recording use NARRATION.txt; the older DEMO-SCRIPT.md also retains a wallet-flow alternative. Capture silent footage if preferred, then add your own narration in Clipchamp. No AI voice is accepted by the event.

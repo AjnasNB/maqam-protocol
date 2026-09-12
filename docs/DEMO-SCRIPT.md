@@ -14,7 +14,7 @@ Record your screen at 1080p or at least 720p with your own voice. Do not use AI 
 
 “AI agents can propose useful transactions. The difficult part is making sure they execute only what we authorized. Maqam Protocol takes the exact approval boundary from my existing Maqam library and makes it independently enforceable onchain.”
 
-Show the opening screen and the new repository's continuity disclosure.
+Show the opening screen and the new repository's dependency disclosure.
 
 ## 0:25–0:55 — Agent proposal
 
@@ -34,7 +34,7 @@ Show recipient and amount rejection, successful execution, then replay rejection
 
 “Changing the recipient invalidates the signature. Doubling the amount does too. The correct payment succeeds. The same approval cannot pay twice—even if the agent bypasses our application and calls the contract directly.”
 
-## 2:20–2:50 — Arc receipt and continuity
+## 2:20–2:50 — Arc receipt and provenance
 
 Click Verify testnet payment and the transaction link.
 

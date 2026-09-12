@@ -1,43 +1,32 @@
-MAQAM PROTOCOL — RECORDED-PROOF WALKTHROUGH
-Speak these words yourself. This is a suggested human narration, not an audio file.
-Aim for roughly 3 minutes; rehearse and check the actual recording duration.
-The bracketed lines are screen actions, not spoken words.
-This version accurately demonstrates the retained execution evidence. Do not call it a new live payment.
+MAQAM PROTOCOL — GRAPH + ARC DEMO
+Human narration for real Chrome capture. Target 3:00–3:30; rehearse at normal speed.
+Do not speak the bracketed actions. Silent footage needs your own voice added before submission.
 
-[0:00 — Show the Maqam app opening screen.]
+[0:00 — Opening screen, then Find an agent.]
+Maqam Protocol helps people discover agents and authorize one exact payment without handing over unrestricted wallet control. The Graph supplies live agent data. Arc enforces the payment.
 
-Maqam Protocol gives an AI agent permission to make one exact payment, without giving it unrestricted control over the owner's wallet.
+[0:20 — Search treasury with minimum reviewers zero.]
+This request queries The Graph's Agent0 Subgraph on Base Sepolia. The app screens the latest fifty registrations for an active profile, a registered agent wallet, and a match to the task. It shows the indexed block and retrieval time. This is live data, not a saved list.
 
-An agent may understand an invoice correctly and still make a dangerous transaction if its instructions change. Our question is simple: how do we make the executed payment match exactly what the person approved?
+The review decision is exploratory. An agent's description is self-declared, and feedback is not proof of trust. The app never substitutes the registration owner's address when an agent wallet is missing.
 
-[0:25 — Click Inspect agent proposal. Scroll until the complete panel is visible.]
+[0:55 — Change minimum reviewers to five and search again.]
+A stricter policy changes the decision. A matching agent without enough distinct reviewers is held. Stale data and indexing errors also stop discovery. The Graph therefore changes what the app permits us to propose.
 
-Here is a real recorded model response to a synthetic invoice. It proposes one USDC for one research report. The model receives no owner key and no signing tool. The prompt, response and policy decision are preserved so the demonstration can be inspected.
+[1:20 — Click Inspect model reasoning from Graph evidence.]
+This panel preserves a real model analysis of an earlier live Graph query. The model recommended a treasury candidate for human review and explained the missing trust evidence. That model call is recorded, not running while I speak. The prompt, response and Graph snapshot can all be inspected.
 
-This is a recorded model call, not a live model request happening while I speak.
+[1:50 — Workspace, show payment form. Do not select an unverified third-party invoice.]
+Before paying a selected agent, the person must independently verify the invoice and recipient. Review refreshes the Graph data and binds the selected agent and exact snapshot hash into the payment evidence.
 
-[0:55 — Click Use this sample proposal. Show the payment form.]
+The signature also binds the owner, executor, token, amount, recipient, expiry, nonce and revocation epoch. The signing domain binds the chain and contract. The executor cannot change those terms.
 
-The proposal fills in the recipient, amount and reason for the payment. In the wallet flow, the owner reviews the exact terms before signing. The signature binds the owner, authorized executor, recipient, token, amount, expiry, nonce, revocation epoch and evidence commitment. The signing domain also binds the chain and contract.
+[2:20 — Click Verify testnet payment. Wait for the live verification badge.]
+Here is a separate, already-mined Arc Testnet payment using controlled test accounts. We did not hire or pay the third-party agent shown in discovery. A scripted owner authorized one test USDC, and a separate executor settled it.
 
-Token allowance is separate and limited to the payment amount. The owner can revoke a pending authorization. The agent can submit the signed packet, but cannot change its terms.
+The browser now verifies the receipt against live Arc RPC. Recorded checks show that changing the recipient or amount invalidates the signature, and replay fails after the nonce is consumed. The rejection checks were simulations; the correct payment was actually mined. Arc uses USDC for both payment and gas.
 
-[1:35 — Click Verify testnet payment. Wait for VERIFIED AGAINST LIVE CHAIN.]
+[3:05 — Show How it works.]
+This new application was built during ETHOnline using the disclosed public Maqam library. It is a testnet prototype, not an audited production wallet. The result is an inspectable path from live agent data to a narrowly scoped payment authorization.
 
-This is the retained execution proof from Arc Testnet. A scripted owner signed, a separate executor submitted the transaction, and the recipient received exactly one test USDC.
-
-The changed recipient and doubled amount were rejected with InvalidSignature. Those rejection checks were simulations, so they did not spend gas. The correct payment was actually mined.
-
-After execution, replay fails because the nonce has been consumed. That protection still holds when the executor bypasses the Maqam application and calls the contract directly.
-
-[2:20 — Point to the live verification badge, accounts and transaction link.]
-
-The browser checks the mined receipt and consumed nonce against Arc's live RPC. Arc is the actual settlement layer here, with USDC used for both payments and executor gas.
-
-[2:40 — Scroll to How it works.]
-
-This is a continuity build extending my existing Maqam library. The onchain executor, wallet interface, Arc integration and adversarial tests are new event work.
-
-The receipt proves that an executed payment matches its authorization. It does not prove an invoice is true, and this is an unaudited testnet prototype. The next step is to apply this exact authorization boundary to more agent tools and audit it for production use.
-
-[Stop. Check total duration, voice, image clarity and absence of browser/Codex chrome before export.]
+[Stop. Check the actual duration is 2–4 minutes, clear human voice, readable text, and no browser toolbar or Codex UI in the capture.]

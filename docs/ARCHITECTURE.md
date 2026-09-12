@@ -3,6 +3,11 @@
 ```mermaid
 flowchart LR
   A[Invoice / user task] --> B[Proposal agent\nno signing authority]
+  T[The Graph\nAgent0 live Subgraph] --> S[Capability and reviewer screening]
+  A --> S
+  S --> B
+  S --> K[Refresh selection\nbind snapshot hash]
+  K --> D
   B --> C[Maqam policy gateway]
   C --> D[Owner reviews exact terms]
   D --> E[Owner wallet\nEIP-712 signature]
@@ -20,6 +25,8 @@ Maqam 0.3.3 is an existing MIT TypeScript library. Its policy and exact-approval
 The new contracts, EIP-712 client, wallet UX, policy endpoint, adversarial tests, proposal adapter, Arc deployment, receipt viewer, and evidence scripts were built in this repository during the event. The original Maqam library is installed as an explicitly pinned dependency rather than copied into the new repository.
 
 ## Hosted and local components
+
+- `/api/agents` reads live Graph data, applies deterministic screening and rejects stale or unhealthy indexes. `graph-agent-propose.mjs` feeds that data to a real model for candidate review. A selected agent's Graph snapshot is refreshed during wallet review and bound into the evidence commitment. See `GRAPH-INTEGRATION.md` for scope and the distinction between the Graph demonstration and the separate mined Arc fixture.
 
 - Vite builds the static browser interface. It requests wallet signatures and testnet transactions through an injected EIP-1193 wallet.
 - `/api/proposal` runs the real Maqam library in a Vercel function and applies a 25-token per-payment review policy. This endpoint does not sign or transfer funds and does not receive invoice text.

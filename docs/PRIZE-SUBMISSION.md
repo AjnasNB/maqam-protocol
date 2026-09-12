@@ -1,6 +1,6 @@
-# Arc continuity prize draft
+# Partner prize applications
 
-Target: Arc — Best DeFi or Agentic Application, Continuity. Only claim this integration. The advertised $3,000 includes a $2,000 mainnet milestone component; this prototype does not promise or perform a mainnet deployment.
+Targets: Arc — Best DeFi/Onchain Finance Application; The Graph — Best AI Tooling or AI Use Case (From Scratch). The Arc $3,500 award includes a $2,500 conditional mainnet milestone. No mainnet deployment or commitment is made. The Graph AI track awards $2,500 / $1,500 / $1,000.
 
 ## Integration description
 
@@ -18,9 +18,17 @@ The frontend supports review, exact allowance approval, typed signing, packet ha
 - Payment: https://testnet.arcscan.app/tx/0x29df2d8d76cc95eca476461b45de397d4ca0cc565640edf8d86f80b609d4826e
 - Architecture: docs/ARCHITECTURE.md and public/architecture.svg
 - Integration feedback: FEEDBACK.md
-- Automated validation: 16 passing tests and 7 recorded Arc proof checks.
+- Automated validation: 22 passing tests and 7 recorded Arc proof checks.
 - Human-narrated demo video: pending; do not claim completed.
 
-## Continuity and AI assistance
+## Public dependencies and AI assistance
 
 The existing MIT Maqam 0.3.3 library supplies offchain policy and exact approval semantics. The onchain executor, wallet interface, Arc integration, server endpoint, adversarial tests, real model adapter and independently verified receipts were built during ETHOnline. Codex assisted implementation, research, tests and documentation. The repository explicitly distinguishes automated fixture signing from human testing. Human hands-on testing and narration must be recorded before final submission.
+
+## The Graph application
+
+The Graph is the live data backend for agent discovery, screening and model candidate analysis. Base Sepolia Agent0 registrations drive REVIEW/HOLD decisions. Missing wallets, inactive registration, task mismatch and insufficient distinct reviewers hold candidates. Index errors or stale data halt discovery. Payment review refreshes a selected agent and binds its snapshot hash into the exact authorization evidence; imports validate the commitment and recipient. Public live-query evidence and a real recorded model analysis are retained. See GRAPH-INTEGRATION.md for reproduction and limits.
+
+The displayed third-party agent was not hired or paid; the Arc settlement proof uses separate controlled test accounts. The deterministic screening engine is not represented as an LLM. The public model panel is recorded, while discovery is live.
+
+Sources: https://ethglobal.com/events/ethonline2026/prizes . Track correction: BUILD-PROVENANCE.md.

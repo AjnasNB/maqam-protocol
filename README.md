@@ -1,10 +1,12 @@
 # Maqam Protocol
 
-Exact, single-use authorization for agent payments. ETHOnline 2026 continuity project.
+Exact, single-use authorization for agent payments. New ETHOnline 2026 application using the public Maqam library. [Build provenance and track correction](docs/BUILD-PROVENANCE.md).
 
 An agent proposes a payment. A person reviews and signs its exact terms. A smart contract verifies the signature and executes that payment once. Changing the recipient, amount, chain, contract, executor, evidence commitment, or expiry invalidates the authorization. Replay and revoked authorizations fail.
 
 Built during ETHOnline, beginning September 12, 2026. This is an unaudited testnet prototype.
+
+**The Graph supplies live agent discovery and screening.** Search Agent0 ERC-8004 records on Base Sepolia, inspect REVIEW/HOLD decisions and a recorded real model analysis, then bind a selected agent's refreshed Graph snapshot to a payment authorization. Arc settles the exact approved USDC payment. [Integration, evidence and limits](docs/GRAPH-INTEGRATION.md).
 
 ## Try the working project
 
@@ -36,7 +38,7 @@ Open `http://127.0.0.1:5186`. `npm run build` creates the production frontend. V
 
 The primary public app uses Cloudflare Workers and Static Assets at `ethonline.ajnasnb.com` (with `maqam.ajnasnb.com` as an alias). `worker.mjs` adapts the exact same policy handler and bounds streamed request bodies to 4 KB. Vercel remains a git-deployed mirror at https://maqam-protocol.vercel.app; its default hostname timed out from the development connection. To update the primary deployment, build and run `wrangler deploy` with an authenticated Wrangler 4 CLI. Review `wrangler.jsonc` before deploying from a different account. GitHub CI verifies the code; the Cloudflare deployment currently requires this explicit command.
 
-The 16 tests cover EVM payment and event consistency, every signed field, executor and domain restrictions, expiry, nonce cancellation, epoch revocation, transaction rollback, ERC-1271 owners, reentrancy, runtime-bytecode checks, network guards, Maqam policy review and the Worker adapter. Ganache may fall back to its JavaScript implementation on newer Node versions.
+The 22 tests cover EVM payment and event consistency, signed fields, executor and domain restrictions, expiry, cancellation, epoch revocation, rollback, ERC-1271, reentrancy, runtime-bytecode checks, network guards, Maqam policy, Worker adapters, Graph screening and snapshot integrity. Ganache may fall back to its JavaScript implementation on newer Node versions.
 
 ```sh
 npm run proof        # fresh local chain, Maqam approval queue and adversarial proof
