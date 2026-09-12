@@ -9,7 +9,10 @@
     "test": "node --test test/*.test.mjs",
     "build": "npm run compile && vite build",
     "dev": "vite --host 127.0.0.1 --port 5186",
-    "start": "node server/index.mjs"
+    "start": "vite --host 127.0.0.1 --port 5186",
+    "proof": "node scripts/proof.mjs",
+    "proof:arc": "node scripts/proof-arc.mjs --agent-proposal",
+    "agent": "node scripts/agent-propose.mjs"
   },
   "dependencies": {
     "@openzeppelin/contracts": "5.0.2",
@@ -20,6 +23,7 @@
     "@fontsource/geist": "5.3.0",
     "@fontsource/geist-mono": "5.3.0",
     "ganache": "7.9.2",
+    "prettier": "3.9.6",
     "solc": "0.8.37",
     "vite": "8.3.0"
   }
