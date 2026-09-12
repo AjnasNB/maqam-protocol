@@ -1,0 +1,16 @@
+[
+  {
+    "chainId": 5042002,
+    "name": "Arc Testnet",
+    "contract": "0x69B538694c740F228a771BcD7925c4E68C1aC2dF",
+    "token": "0x3600000000000000000000000000000000000000",
+    "tokenDecimals": 6,
+    "owner": "0xBf069B917C49ded7a5931FD3C4226A544A93D25B",
+    "executor": "0x7f676a86c306CC08a6808fCCba811391d6221Eb7",
+    "deploymentTransaction": "0xb1fbbaf343b81ffd7112e75b210ac4aab56cc858b469d5ccdc6118e532aa8be6",
+    "compiler": "0.8.37+commit.f401782d.Emscripten.clang",
+    "deployedAt": "2026-09-12T09:03:59.370Z",
+    "explorer": "https://testnet.arcscan.app",
+    "supersededReason": "Recompile with explorer-supported stable compiler for source verification."
+  }
+]

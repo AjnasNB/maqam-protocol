@@ -24,7 +24,7 @@
     "@fontsource/geist-mono": "5.3.0",
     "ganache": "7.9.2",
     "prettier": "3.9.6",
-    "solc": "0.8.37",
+    "solc": "0.8.36",
     "vite": "8.3.0"
   }
 }

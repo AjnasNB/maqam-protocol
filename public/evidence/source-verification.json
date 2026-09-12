@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-09-12T09:22:45.280Z",
+  "address": "0x8267D3D996e4884BBc7E88307a46A957AC95ea2b",
+  "name": "MaqamExecutor",
+  "compilerVersion": "v0.8.36+commit.8a079791",
+  "verifiedAt": "2026-09-12T09:14:42.574049Z",
+  "fullyVerified": true,
+  "partiallyVerified": false,
+  "changedBytecode": false
+}

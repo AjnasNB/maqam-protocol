@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-12T09:12:43.579Z",
+  "generatedAt": "2026-09-12T09:07:02.965Z",
   "environment": "Arc Testnet — valueless test USDC",
   "chainId": 5042002,
-  "contract": "0x8267D3D996e4884BBc7E88307a46A957AC95ea2b",
+  "contract": "0x69B538694c740F228a771BcD7925c4E68C1aC2dF",
   "token": "0x3600000000000000000000000000000000000000",
   "owner": "0xBf069B917C49ded7a5931FD3C4226A544A93D25B",
   "executor": "0x7f676a86c306CC08a6808fCCba811391d6221Eb7",
@@ -35,17 +35,17 @@
     "token": "0x3600000000000000000000000000000000000000",
     "recipient": "0xad3117A01feFE725C8D1b5e23E22933753bd9FAA",
     "amount": "1000000",
-    "nonce": "129514143726614007007154529776896555211",
-    "deadline": 1789206155,
+    "nonce": "317921163940474533073165766410276985412",
+    "deadline": 1789205813,
     "epoch": "0",
     "evidenceHash": "0x2acb8b55033d194a9bdc08efd1c26ba1764c6267b841cbdb4be58a4837d70153"
   },
-  "signature": "0xb32b95b936802977ef288e27ad6dc57ae7a397ca58a89ea6c164884c4e388ed238a4ea56aa992c6e5876f213f8b4669453bea2a6358ba5003c764c69c55efdd71b",
-  "authorizationDigest": "0xf7578ffeae40b1f1df169ac6575d63d17a95f207715fc6c2de09e676ac4444cf",
-  "allowanceTransaction": "0xae6e0e73940ef01b7530cfc7d70310bfb6352d62090bde5e99296f8bab821592",
+  "signature": "0x6945e4d4ca7742222b999f685e2bf8d971827317f64601bd655495957ccb1a82120e8c87a716e41fde5bb1bf2f99a1e8a1dafc84cdd80a003cbd960e3eeb8cf71c",
+  "authorizationDigest": "0x6f6b6e52fe4d69a1aae5f80a10ecb4d7281cb9cb18aa9b3836c9ca601db96d8d",
+  "allowanceTransaction": "0xde6523d8343e44b67577ce41e464af0ede11e2393045278ea132f6408df51642",
   "receipt": {
-    "transactionHash": "0x29df2d8d76cc95eca476461b45de397d4ca0cc565640edf8d86f80b609d4826e",
-    "blockNumber": 61706316,
+    "transactionHash": "0x27675f4925f490981043820027ead2a896a787f3783bd4f2d9e83f5732e5e398",
+    "blockNumber": 61705649,
     "status": 1
   },
   "results": [
@@ -74,8 +74,8 @@
     {
       "test": "Separate agent pays exactly 1 test USDC",
       "method": "Mined Arc Testnet transaction",
-      "transactionHash": "0x29df2d8d76cc95eca476461b45de397d4ca0cc565640edf8d86f80b609d4826e",
-      "blockNumber": 61706316,
+      "transactionHash": "0x27675f4925f490981043820027ead2a896a787f3783bd4f2d9e83f5732e5e398",
+      "blockNumber": 61705649,
       "status": 1,
       "passed": true
     },

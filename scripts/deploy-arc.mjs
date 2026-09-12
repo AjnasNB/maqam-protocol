@@ -43,6 +43,12 @@ try {
   let address = existing["5042002"]?.contract,
     txHash = existing["5042002"]?.deploymentTransaction;
   const artifact = JSON.parse(fs.readFileSync("artifacts/MaqamExecutor.json"));
+  if(address && existing['5042002'].compiler!==artifact.compiler){
+    const history=fs.existsSync('public/deployments-history.json')?JSON.parse(fs.readFileSync('public/deployments-history.json')):[];
+    history.push({...existing['5042002'],supersededReason:'Recompile with explorer-supported stable compiler for source verification.'});
+    fs.writeFileSync('public/deployments-history.json',JSON.stringify(history,null,2)+'\n');
+    address=undefined;
+  }
   if (!address) {
     const c = await new ContractFactory(
       artifact.abi,
