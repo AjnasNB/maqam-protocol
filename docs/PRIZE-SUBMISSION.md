@@ -12,7 +12,7 @@ The frontend supports review, exact allowance approval, typed signing, packet ha
 
 ## Evidence
 
-- App: https://maqam.ajnasnb.com
+- App: https://ethonline.ajnasnb.com
 - Repository: https://github.com/AjnasNB/maqam-protocol
 - Fully verified contract: https://testnet.arcscan.app/address/0x8267D3D996e4884BBc7E88307a46A957AC95ea2b?tab=contract
 - Payment: https://testnet.arcscan.app/tx/0x29df2d8d76cc95eca476461b45de397d4ca0cc565640edf8d86f80b609d4826e

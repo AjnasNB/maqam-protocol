@@ -1,0 +1,61 @@
+You're missing the following to complete this form
+Please upload a video. A demo video is required if you're applying to be a finalist.
+Your repository has passed all automated checks
+
+All submissions are subject to manual review by judges. All submissions are subject to manual review by judges.
+
+Rerun checks
+Final Submission
+🤝 Team
+Edit team
+
+If there's someone missing from your team, please click Edit Team and invite them before submitting.
+
+AB
+Ajnas N B
+
+Developer
+
+You can edit your project until the submission deadline
+You can submit and then still make edits until the submission deadline. If you have any questions, don't hesitate to contact us on" Discord or by email.
+
+To qualify for judging and prizes, ensure the following
+
+I will be starting this project from scratch
+
+I will be using github and committing changes frequently
+
+I will be open-sourcing my submission
+
+I will not be submitting this project to another hackathon
+
+I will abide by all official
+ETHGlobal event rules
+
+I confirm that the work I am submitting was built entirely during this hackathon and no work was completed before the event as outlined in the Event Rules & Code of Conduct.
+Submit project
+Project rules
+Project should use version control
+You must commit frequently and not have small commits with large changes on github.
+Project should be open source
+You repo must remain public for anyone to verify your work.
+Project video should not exceed 4 minutes
+Attempts to speed-up video will disqualify your submission. This will be verified manually.
+Example projects
+Sign up to get the latest news and updates on ETHGlobal
+Products
+ETHConf
+Events
+Pragma
+Packs
+Plus New
+Faucet
+Legal
+Rules & Conduct
+Privacy Policy
+Company
+About
+Brand
+Careers Hiring
+
+© 2026 ETHGlobal. All rights reserved.

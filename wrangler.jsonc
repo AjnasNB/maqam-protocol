@@ -9,6 +9,9 @@
     "binding": "ASSETS",
     "run_worker_first": ["/api/*"],
   },
-  "routes": [{ "pattern": "maqam.ajnasnb.com", "custom_domain": true }],
+  "routes": [
+    { "pattern": "maqam.ajnasnb.com", "custom_domain": true },
+    { "pattern": "ethonline.ajnasnb.com", "custom_domain": true },
+  ],
   "observability": { "enabled": true, "head_sampling_rate": 0.1 },
 }
