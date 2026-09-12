@@ -1,0 +1,24 @@
+{
+  "name": "maqam-protocol",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "compile": "node scripts/compile.mjs",
+    "test": "node --test test/*.test.mjs",
+    "build": "npm run compile && vite build",
+    "dev": "vite --host 127.0.0.1 --port 5186",
+    "start": "node server/index.mjs"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "5.0.2",
+    "ethers": "6.17.0",
+    "maqam": "0.3.3"
+  },
+  "devDependencies": {
+    "ganache": "7.9.2",
+    "solc": "0.8.37",
+    "vite": "8.3.0"
+  }
+}
