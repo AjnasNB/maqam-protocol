@@ -32,7 +32,8 @@ let provider,
   chainId,
   packet,
   executed = false,
-  busy = false;
+  busy = false,
+  revision = 0;
 const erc20 = [
   "function approve(address spender,uint256 amount) returns(bool)",
   "function allowance(address owner,address spender) view returns(uint256)",
@@ -72,6 +73,7 @@ async function action(fn) {
   if (busy) return;
   busy = true;
   document.body.setAttribute("aria-busy", "true");
+  document.querySelector("main").inert = true;
   try {
     await fn();
   } catch (error) {
@@ -79,13 +81,18 @@ async function action(fn) {
   } finally {
     busy = false;
     document.body.removeAttribute("aria-busy");
+    document.querySelector("main").inert = false;
   }
 }
 function invalidate() {
+  revision++;
   packet = undefined;
   executed = false;
   $("review-empty").hidden = false;
   $("review-details").hidden = true;
+  $("sign").disabled = true;
+  $("attack-result").textContent =
+    "Sign a payment to unlock the attack lab. Replay is tested after execution.";
   for (const id of [
     "execute",
     "cancel",
@@ -98,15 +105,36 @@ function invalidate() {
 }
 async function ensureWallet() {
   if (!signer) throw new Error("Connect a testnet wallet first.");
+  const expectedSigner = signer,
+    expectedOwner = owner;
   const current = Number(await provider.send("eth_chainId", []));
   requireTestnet(current);
   if (current !== Number($("network").value))
     throw new Error(
       "Switch the wallet to the selected test network by reconnecting.",
     );
-  if (getAddress(await signer.getAddress()) !== owner)
+  const accounts = await provider.send("eth_accounts", []);
+  if (
+    signer !== expectedSigner ||
+    owner !== expectedOwner ||
+    !accounts[0] ||
+    getAddress(accounts[0]) !== expectedOwner
+  )
     throw new Error("Wallet account changed. Reconnect before continuing.");
   return current;
+}
+async function ensureCurrent(expected) {
+  await ensureWallet();
+  if (!expected || packet !== expected)
+    throw new Error("Proposal changed. Review and sign a fresh proposal.");
+}
+function disconnect(message) {
+  signer = undefined;
+  owner = undefined;
+  invalidate();
+  $("owner").textContent = "Not connected";
+  $("connect").textContent = "Connect testnet wallet ↗";
+  status(message);
 }
 async function connect() {
   if (!window.ethereum)
@@ -150,9 +178,8 @@ async function connect() {
   invalidate();
   status(`Connected to ${n.name}. Only valueless test assets are supported.`);
 }
-async function executorContract() {
+async function executorContract(address = $("contract").value.trim()) {
   const current = await ensureWallet();
-  const address = $("contract").value.trim();
   if (!isAddress(address))
     throw new Error(
       "Deploy a Maqam executor contract or enter its verified address in advanced settings.",
@@ -210,6 +237,7 @@ async function setNetwork() {
 }
 async function deploy() {
   await ensureWallet();
+  invalidate();
   const n = requireTestnet(chainId);
   status("Confirm executor contract deployment in your wallet.");
   const a = await artifact("MaqamExecutor");
@@ -277,6 +305,8 @@ function renderPacket() {
   $("attack-replay").disabled = !executed;
 }
 async function review() {
+  invalidate();
+  const startingRevision = revision;
   await ensureWallet();
   const c = await executorContract();
   const recipient = getAddress($("recipient").value.trim());
@@ -314,6 +344,10 @@ async function review() {
     ? `${memo}\nGraph agent: ${graphEvidence.agentId}\nGraph snapshot: ${graphEvidence.snapshotHash}`
     : memo;
   const block = await provider.getBlock("latest");
+  const epoch = (await c.epochs(owner)).toString();
+  await ensureWallet();
+  if (revision !== startingRevision)
+    throw new Error("Inputs or wallet changed. Review the proposal again.");
   packet = {
     version: 1,
     chainId,
@@ -328,7 +362,7 @@ async function review() {
       amount: amount.toString(),
       nonce: BigInt(hexlify(randomBytes(16))).toString(),
       deadline: block.timestamp + Number($("expiry").value),
-      epoch: (await c.epochs(owner)).toString(),
+      epoch,
       evidenceHash: evidenceHash(note),
     },
   };
@@ -339,8 +373,8 @@ async function review() {
   );
 }
 async function sign() {
-  await ensureWallet();
-  if (!packet) throw new Error("Review a proposal first.");
+  const reviewed = packet;
+  await ensureCurrent(reviewed);
   if (packet.authorization.owner !== owner)
     throw new Error("Only the payment owner may sign.");
   const a = packet.authorization;
@@ -353,31 +387,37 @@ async function sign() {
       "Insufficient test token balance. Use the Circle faucet for Arc or mint demo tokens in advanced settings.",
     );
   const allowance = await token.allowance(owner, packet.contract);
+  await ensureCurrent(reviewed);
   if (allowance !== BigInt(a.amount)) {
     if (allowance > 0n) {
       status(
         "Resetting the previous token allowance to zero. Confirm in your wallet.",
       );
       await (await token.approve(packet.contract, 0)).wait();
+      await ensureCurrent(reviewed);
     }
     status(
       "Approve an allowance limited to this exact payment in your wallet.",
     );
     await (await token.approve(packet.contract, a.amount)).wait();
   }
+  await ensureCurrent(reviewed);
   status("Now inspect and sign the exact EIP-712 payment in your wallet.");
-  packet.signature = await signer.signTypedData(
+  const signature = await signer.signTypedData(
     domain(packet.chainId, packet.contract),
     types,
     a,
   );
+  await ensureCurrent(reviewed);
+  packet.signature = signature;
   renderPacket();
   status(
     "Signed. This authorization can execute once before expiry. Test tampering before executing.",
   );
 }
 async function execution() {
-  await ensureWallet();
+  const reviewed = packet;
+  await ensureCurrent(reviewed);
   await executorContract();
   if (!packet?.signature) throw new Error("Sign a proposal first.");
   if (getAddress(packet.authorization.executor) !== owner)
@@ -387,12 +427,21 @@ async function execution() {
   const a = await artifact("MaqamExecutor");
   const c = new Contract(packet.contract, a.abi, signer);
   await c.execute.staticCall(packet.authorization, packet.signature);
+  await ensureCurrent(reviewed);
   status(
     "Simulation passed. Confirm the exact testnet execution transaction in your wallet.",
   );
   const tx = await c.execute(packet.authorization, packet.signature);
   status(`Submitted ${tx.hash}. Waiting for confirmation…`);
   const receipt = await tx.wait();
+  // A confirmed transaction stays onchain if the user changes account while waiting.
+  // Do not attach its result to a different or cleared authorization.
+  if (packet !== reviewed) {
+    status(
+      `Transaction ${tx.hash} confirmed with status ${receipt.status}. Reconnect and inspect the explorer; the wallet session changed.`,
+    );
+    return;
+  }
   if (receipt.status !== 1) throw new Error("Transaction reverted.");
   const event = receipt.logs
     .map((log) => {
@@ -469,7 +518,8 @@ async function attack(kind) {
   }
 }
 async function cancel() {
-  await ensureWallet();
+  const reviewed = packet;
+  await ensureCurrent(reviewed);
   if (!packet) throw new Error("No proposal to revoke.");
   if (getAddress(packet.authorization.owner) !== owner)
     throw new Error("Only the owner can revoke this approval.");
@@ -498,6 +548,8 @@ function download() {
 async function importPacket(file) {
   await ensureWallet();
   if (!file) return;
+  invalidate();
+  const startingRevision = revision;
   if (file.size > 2100000) throw new Error("Packet exceeds 2.1 MB.");
   const p = JSON.parse(await file.text());
   if (
@@ -511,9 +563,25 @@ async function importPacket(file) {
   if (!isAddress(p.contract) || !isAddress(p.authorization.token))
     throw new Error("Invalid contract or token address.");
   digest(p.chainId, p.contract, p.authorization);
-  if (p.note && evidenceHash(p.note) !== p.authorization.evidenceHash)
+  if (
+    typeof p.note !== "string" ||
+    !p.note.trim() ||
+    evidenceHash(p.note) !== p.authorization.evidenceHash
+  )
     throw new Error("Evidence text does not match signed commitment.");
   validateGraphEvidence(p);
+  const assessment = assessProposal(p.authorization);
+  if (!assessment.allowed) throw new Error(assessment.reason);
+  const c = await executorContract(p.contract);
+  const t = new Contract(p.authorization.token, erc20, provider);
+  if ((await t.decimals()) !== 6n)
+    throw new Error("This prototype supports only six-decimal test tokens.");
+  await c
+    .connect(provider)
+    .validate(p.authorization, p.signature, { from: p.authorization.executor });
+  await ensureWallet();
+  if (revision !== startingRevision)
+    throw new Error("Inputs or wallet changed. Import the packet again.");
   packet = p;
   executed = false;
   $("contract").value = p.contract;
@@ -576,23 +644,18 @@ for (const id of [
   "token",
 ])
   $(id).addEventListener("input", () => {
-    if (packet) {
-      invalidate();
+    const hadProposal = Boolean(packet) || busy;
+    invalidate();
+    if (hadProposal) {
       status("Inputs changed. Review and sign a fresh proposal.");
     }
   });
 if (window.ethereum?.on) {
   window.ethereum.on("accountsChanged", () => {
-    signer = undefined;
-    owner = undefined;
-    invalidate();
-    $("owner").textContent = "Reconnect wallet";
-    status("Wallet account changed. Reconnect to continue.");
+    disconnect("Wallet account changed. Reconnect to continue.");
   });
   window.ethereum.on("chainChanged", () => {
-    signer = undefined;
-    invalidate();
-    status("Wallet network changed. Reconnect to continue.");
+    disconnect("Wallet network changed. Reconnect to continue.");
   });
 }
 setNetwork();

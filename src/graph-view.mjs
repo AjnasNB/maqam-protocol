@@ -1,4 +1,5 @@
 let selection;
+let queryRevision = 0;
 const el = (id) => document.getElementById(id);
 const node = (tag, text, className) => {
   const n = document.createElement(tag);
@@ -13,12 +14,15 @@ export function clearGraphSelection() {
 }
 export async function refreshGraphSelection(recipient) {
   if (!selection) return null;
+  const selected = selection;
   if (selection.wallet.toLowerCase() !== recipient.toLowerCase())
     throw new Error(
       "Recipient differs from the selected Graph agent. Clear the agent selection for a manual payment.",
     );
   const data = await query(selection.input);
-  const candidate = data.candidates.find((a) => a.id === selection.id);
+  if (selection !== selected)
+    throw new Error("Graph selection changed. Review the payment again.");
+  const candidate = data.candidates.find((a) => a.id === selected.id);
   if (
     !candidate?.eligible ||
     candidate.wallet.toLowerCase() !== recipient.toLowerCase()
@@ -44,6 +48,17 @@ async function query(input) {
   return data;
 }
 export function initGraphView(onSelect) {
+  for (const id of ["graph-task", "graph-network", "graph-reviewers"]) {
+    el(id).addEventListener("input", () => {
+      queryRevision++;
+      clearGraphSelection();
+      onSelect(null);
+      el("graph-results").replaceChildren();
+      el("graph-status").textContent =
+        "Screening conditions changed. Discover agents again.";
+      el("graph-search").disabled = false;
+    });
+  }
   el("graph-model").onclick = async () => {
     const target = el("graph-model-result");
     target.hidden = false;
@@ -90,6 +105,7 @@ export function initGraphView(onSelect) {
   };
   el("graph-form").onsubmit = async (e) => {
     e.preventDefault();
+    const requestRevision = ++queryRevision;
     const button = el("graph-search"),
       results = el("graph-results"),
       status = el("graph-status");
@@ -105,13 +121,23 @@ export function initGraphView(onSelect) {
     };
     try {
       const data = await query(input);
+      if (requestRevision !== queryRevision) return;
       const eligible = data.candidates.filter((a) => a.eligible).length;
       status.textContent = `LIVE DATA · ${data.networkName} · indexed block ${data.indexedBlock} · ${eligible} of ${data.candidates.length} candidates meet screening conditions. Updated ${new Date(data.retrievedAt).toLocaleTimeString()}.`;
       if (!data.candidates.length)
         results.append(
-          node("p", "No registrations returned. Try the other test network."),
+          node(
+            "p",
+            "No registrations returned. Try again when the registry has updated.",
+          ),
         );
-      results.append(node("p", "Showing the four highest-ranked candidates from this 50-registration sample. Full results are in the evidence below.", "graph-scope"));
+      results.append(
+        node(
+          "p",
+          "Showing the four highest-ranked candidates from this 50-registration sample. Full results are in the evidence below.",
+          "graph-scope",
+        ),
+      );
       for (const candidate of data.candidates.slice(0, 4)) {
         const card = node("article", "", "graph-card");
         card.append(
@@ -163,9 +189,9 @@ export function initGraphView(onSelect) {
       );
       results.append(details);
     } catch (error) {
-      status.textContent = error.message;
+      if (requestRevision === queryRevision) status.textContent = error.message;
     } finally {
-      button.disabled = false;
+      if (requestRevision === queryRevision) button.disabled = false;
     }
   };
 }
